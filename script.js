@@ -133,7 +133,8 @@ function updateChart(workedMinutes, remainingMinutes) {
 }
 
 // Global variable to control jail animation
-let jailOpenPercentage = 0; // 0 = closed (full jail), 1 = open (no jail)
+let currentJailOpenPercentage = 0; // Current state for animation
+let targetJailOpenPercentage = 0; // Target state based on calculation
 
 const clearBtn = document.getElementById('clear-btn');
 
@@ -156,8 +157,8 @@ clearBtn.addEventListener('click', () => {
         workChart = null;
     }
 
-    // Reset Animation
-    jailOpenPercentage = 0;
+    // Reset Animation Target
+    targetJailOpenPercentage = 0;
 });
 
 calcBtn.addEventListener('click', () => {
@@ -175,10 +176,10 @@ calcBtn.addEventListener('click', () => {
 
     // Calculate jail open percentage
     if (remainingMinutes <= 0) {
-        jailOpenPercentage = 1; // Fully open
+        targetJailOpenPercentage = 1; // Fully open
     } else {
-        jailOpenPercentage = 1 - (remainingMinutes / targetMinutes);
-        if (jailOpenPercentage < 0) jailOpenPercentage = 0;
+        targetJailOpenPercentage = 1 - (remainingMinutes / targetMinutes);
+        if (targetJailOpenPercentage < 0) targetJailOpenPercentage = 0;
     }
 
     const now = new Date();
@@ -272,11 +273,15 @@ const initThreeJS = () => {
     const animate = () => {
         requestAnimationFrame(animate);
 
-        // Animation logic based on jailOpenPercentage
+        // Smoothly interpolate current value towards target
+        // Lerp factor 0.05 gives a nice smooth transition
+        currentJailOpenPercentage += (targetJailOpenPercentage - currentJailOpenPercentage) * 0.05;
+
+        // Animation logic based on currentJailOpenPercentage
         // 0% open = Solid, fast rotation, high opacity
         // 100% open = Expanded, slow rotation, low opacity (Dissolved)
 
-        const openness = jailOpenPercentage;
+        const openness = currentJailOpenPercentage;
 
         // Expansion effect
         const scale = 1 + openness * 2; // Expands up to 3x

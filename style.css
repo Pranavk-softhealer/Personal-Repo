@@ -345,3 +345,19 @@ button:active {
         transform: translateX(0);
     }
 }
+
+/* Mobile Responsive Fix */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        padding: 1rem 0;
+    }
+
+    .glass-container {
+        max-height: none;
+        margin: 1rem auto;
+        width: 90%;
+    }
+}
