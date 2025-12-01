@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Leaving Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div id="canvas-container"></div>
+
+    <main class="glass-container">
+        <header>
+            <h1>Time Leaving Calculator</h1>
+            <p>Calculate your leaving time with precision</p>
+            <p class="note" style="color: #ff7675; font-size: 1.1rem; margin-top: 5px; font-weight: 500;">Note : Leaving
+                time calculation as per total 8:15H not 8:20H</p>
+        </header>
+
+        <section class="input-section">
+            <div id="timesheet-inputs">
+                <!-- Inputs will be added here dynamically -->
+            </div>
+            <div class="controls">
+                <button id="add-btn" class="secondary-btn" aria-label="Add Timesheet"
+                    style="background: rgba(85, 239, 196, 0.15); color: #55efc4; border-color: rgba(85, 239, 196, 0.3);">
+                    <span class="icon" style="font-size: 1.8rem;">+</span>
+                </button>
+                <button id="clear-btn" class="secondary-btn"
+                    style="background: rgba(255, 118, 117, 0.1); color: #ff7675; border-color: rgba(255, 118, 117, 0.2);">
+                    Reset
+                </button>
+                <button id="calc-btn" class="primary-btn">Calculate</button>
+            </div>
+        </section>
+
+        <section id="result-section" class="result-section hidden">
+            <div class="stats-grid">
+                <div class="result-card">
+                    <h3>Total Worked</h3>
+                    <p id="total-worked">0H</p>
+                </div>
+                <div class="result-card">
+                    <h3 id="remaining-label">Remaining</h3>
+                    <p id="remaining-time">0H</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="workChart"></canvas>
+            </div>
+
+            <div class="result-card highlight">
+                <h3>Leaving Time</h3>
+                <p id="leaving-time">--:--</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
