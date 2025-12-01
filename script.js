@@ -274,8 +274,8 @@ const initThreeJS = () => {
         requestAnimationFrame(animate);
 
         // Smoothly interpolate current value towards target
-        // Lerp factor 0.05 gives a nice smooth transition
-        currentJailOpenPercentage += (targetJailOpenPercentage - currentJailOpenPercentage) * 0.05;
+        // Lerp factor 0.02 gives a slower, smoother transition
+        currentJailOpenPercentage += (targetJailOpenPercentage - currentJailOpenPercentage) * 0.02;
 
         // Animation logic based on currentJailOpenPercentage
         // 0% open = Solid, fast rotation, high opacity
@@ -288,7 +288,8 @@ const initThreeJS = () => {
         prison.scale.set(scale, scale, scale);
 
         // Rotation speed decreases as it opens
-        const rotationSpeed = 0.005 * (1 - openness * 0.8);
+        // Reduced base speed from 0.005 to 0.002 for slower animation
+        const rotationSpeed = 0.002 * (1 - openness * 0.8);
         prison.rotation.x += rotationSpeed;
         prison.rotation.y += rotationSpeed;
 
