@@ -14,21 +14,7 @@
     --font-family: 'Outfit', sans-serif;
 }
 
-:root {
-    --bg-color: #0f0f13;
-    --glass-bg: rgba(20, 20, 25, 0.75);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --primary-color: #6c5ce7;
-    --primary-hover: #5b4cc4;
-    --secondary-color: #a29bfe;
-    --text-color: #ffffff;
-    --text-muted: #b2bec3;
-    --accent-color: #00cec9;
-    --danger-color: #ff7675;
-    --danger-hover: #d63031;
-    --success-color: #00b894;
-    --font-family: 'Outfit', sans-serif;
-}
+
 
 * {
     margin: 0;
@@ -307,6 +293,7 @@ button:active {
     background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(0, 206, 201, 0.15));
     border-color: rgba(108, 92, 231, 0.3);
     padding: 1.2rem;
+    grid-column: span 2;
 }
 
 .result-card h3 {
@@ -386,18 +373,7 @@ button:active {
         margin: 0 auto;
         /* Center with margin */
         width: 90%;
-        /* Solid Red Background */
-        border: none;
-        color: white;
-        width: 36px;
-        height: 36px;
-        border-radius: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        box-shadow: 0 4px 10px rgba(255, 118, 117, 0.3);
+
     }
 
     .delete-btn:hover {
@@ -559,38 +535,13 @@ button:active {
         }
     }
 
-    /* Mobile Responsive Fix */
-    @media (max-width: 768px) {
+}
 
-        html,
-        body {
-            overflow-y: auto;
-            height: auto;
-            min-height: 100vh;
-            position: relative;
-            display: block;
-            /* Disable flex centering for mobile */
-        }
-
-        body {
-            padding: 2rem 0;
-        }
-
-        .glass-container {
-            max-height: none;
-            margin: 0 auto;
-            /* Center with margin */
-            width: 90%;
-            transform: none;
-            /* Remove any centering transforms if present */
-        }
+/* Desktop Scroll Lock - REMOVED to allow scrolling */
+@media (min-width: 769px) {
+    body {
+        /* overflow: hidden; */
+        min-height: 100vh;
+        height: auto;
     }
-
-    /* Desktop Scroll Lock - REMOVED to allow scrolling */
-    @media (min-width: 769px) {
-        body {
-            /* overflow: hidden; */
-            min-height: 100vh;
-            height: auto;
-        }
-    }
+}
