@@ -203,6 +203,45 @@ calcBtn.addEventListener('click', () => {
     updateChart(totalMinutesWorked, remainingMinutes);
 });
 
+// Keyboard Shortcuts
+document.addEventListener('keydown', (event) => {
+    // Enter key -> Calculate
+    if (event.key === 'Enter') {
+        calcBtn.click();
+    }
+
+    // Plus key (+) -> Add Timesheet
+    // Check for both NumpadAdd and standard Plus (Shift+=)
+    if (event.key === '+' || event.code === 'NumpadAdd') {
+        // Prevent default if focused on an input to avoid typing '+'
+        if (document.activeElement.tagName !== 'INPUT') {
+            addBtn.click();
+        } else {
+            // If inside input, we might want to allow typing +, but user asked for shortcut
+            // "when i press plus(+) key then add a new time sheet"
+            // Usually shortcuts shouldn't interfere with typing, but for number inputs + isn't valid usually unless scientific notation?
+            // Let's assume global shortcut for now, but maybe prevent default to avoid typing it
+            event.preventDefault();
+            addBtn.click();
+        }
+    }
+
+    // Minus key (-) -> Delete Active Timesheet
+    if (event.key === '-' || event.code === 'NumpadSubtract') {
+        const activeElement = document.activeElement;
+        if (activeElement && activeElement.classList.contains('time-input')) {
+            event.preventDefault(); // Prevent typing '-'
+            const inputGroup = activeElement.closest('.input-group');
+            if (inputGroup) {
+                const deleteBtn = inputGroup.querySelector('.delete-btn');
+                if (deleteBtn) {
+                    deleteBtn.click();
+                }
+            }
+        }
+    }
+});
+
 
 // Three.js Background Animation - Digital Time Prison
 const initThreeJS = () => {
