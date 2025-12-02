@@ -60,6 +60,12 @@ function createInputGroup() {
         </div>
     `;
     timesheetInputsContainer.appendChild(div);
+
+    // Focus the new input
+    const input = div.querySelector('.time-input');
+    if (input) {
+        input.focus();
+    }
 }
 
 // Initial input
@@ -70,6 +76,18 @@ addBtn.addEventListener('click', createInputGroup);
 window.deleteInput = function (id) {
     const element = document.getElementById(`input-group-${id}`);
     if (element) {
+        // Find previous input to focus
+        const allGroups = Array.from(timesheetInputsContainer.children);
+        const index = allGroups.indexOf(element);
+
+        if (index > 0) {
+            const previousGroup = allGroups[index - 1];
+            const previousInput = previousGroup.querySelector('.time-input');
+            if (previousInput) {
+                previousInput.focus();
+            }
+        }
+
         element.remove();
     }
 }
@@ -226,11 +244,28 @@ document.addEventListener('keydown', (event) => {
         }
     }
 
-    // Minus key (-) -> Delete Active Timesheet
-    if (event.key === '-' || event.code === 'NumpadSubtract') {
+    // Delete key -> Delete Active Timesheet
+    if (event.key === 'Delete') {
         const activeElement = document.activeElement;
         if (activeElement && activeElement.classList.contains('time-input')) {
-            event.preventDefault(); // Prevent typing '-'
+            // No need to prevent default for Delete usually, but we want to trigger our custom delete
+            // However, if the input has text, Delete usually deletes character. 
+            // The user said "use delete key instead of minus key for delete button".
+            // If I just press delete, it might delete the character. 
+            // If the input is empty? Or always?
+            // Usually "Delete" key on a row implies deleting the row.
+            // Let's assume if the user presses Delete, they want to delete the row, 
+            // OR maybe only if the input is empty? 
+            // The request says "use delete key ... for delete button". 
+            // The delete button deletes the whole row.
+            // So I will execute the row deletion. 
+            // I should probably prevent default to stop it from deleting text if that's the intent, 
+            // but if they want to edit text? 
+            // "Delete" key is dangerous for editing. 
+            // But the user specifically asked for it. 
+            // "in key binding use delete key instead of minus(-) key for delete button"
+            // I will implement it as requested.
+
             const inputGroup = activeElement.closest('.input-group');
             if (inputGroup) {
                 const deleteBtn = inputGroup.querySelector('.delete-btn');
