@@ -31,7 +31,8 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+    padding: 2rem 0;
 }
 
 #canvas-container {
@@ -57,7 +58,8 @@ body {
     max-width: 550px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
     animation: fadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    max-height: 98vh;
+    /* max-height: 98vh; */
+    margin: auto;
     /* Ensure it fits */
     display: flex;
     flex-direction: column;
