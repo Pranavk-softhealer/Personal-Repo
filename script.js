@@ -188,8 +188,11 @@ calcBtn.addEventListener('click', () => {
             totalMinutesWorked += parseTimeDecimal(input.value);
         }
     });
-
-    const targetMinutes = 8 * 60 + 15; // 8 hours 15 minutes = 495 minutes
+// =======================================================================================
+// =======================================================================================
+// =======================================================================================
+// =======================================================================================
+    const targetMinutes = 8 * 60 + 30; // 8 hours 15 minutes = 495 minutes
     const remainingMinutes = targetMinutes - totalMinutesWorked;
 
     // Calculate jail open percentage
